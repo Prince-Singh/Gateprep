@@ -1,0 +1,25 @@
+#include <iostream>
+using namespace std;
+int max_subarray_sum(int arr[], int size, int k)
+{
+    int maxseensofar = 0;
+    int lastsum = 0;
+    int startindex = 0;
+    lastsum = arr[0] + arr[1] + arr[2];
+    maxseensofar = lastsum;
+    for(int i=1; i<=(size-k); i++)
+    {
+    	  lastsum = lastsum + arr[i+2] - arr[i-1];
+    	  if(lastsum>maxseensofar)
+    	    maxseensofar = lastsum;
+    }
+    return maxseensofar;
+}
+int main() {
+	
+	int arr[] = {11,-8,16,-7,24,-2,3};
+	int k =3;
+	int max_sum_subarray = max_subarray_sum(arr, 7,k);
+	cout<<max_sum_subarray;
+	return 0;
+}
