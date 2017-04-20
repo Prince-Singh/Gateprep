@@ -1,0 +1,35 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+void next_greater_element(int arr[], int size)
+{
+       	stack<int> s;
+       	int x= 0 ;
+       	s.push(arr[0]);
+       	for(int i=1; i<size; i++)
+       	{
+       		 if(arr[i]<=s.top())
+       		   s.push(arr[i]);
+       		 else
+       		  {
+       		  	 while(!s.empty() && arr[i]>s.top())
+       		  	 { x = s.top();
+       		  	  s.pop();
+       		  	  cout<<"Next greater element of "<<x<<" is "<<arr[i]<<endl;
+       		     }
+       		     s.push(arr[i]);
+       		  }
+       	}
+       	while(!s.empty())
+       	{
+       		x = s.top();
+       		s.pop();
+       		cout<<"Next greater element of "<<x<<" is NULL"<<endl;
+       	}
+}
+int main() {
+
+    int arr[] = {1,2,3,4,5,6,7};
+    next_greater_element(arr,7);
+	return 0;
+}
