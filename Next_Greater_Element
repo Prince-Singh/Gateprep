@@ -1,0 +1,47 @@
+#include <iostream>
+using namespace std;
+struct node
+{
+    int data;
+    node* left;
+    node* right;
+};
+struct node* array_to_tree(int arr[], int start, int end)
+{
+    int mid = 0;
+    if(start>end)
+      return NULL;
+    else
+    {  mid = (start+end)/2;
+       struct node* newnode = (node*)malloc(sizeof(node));
+       newnode->data = arr[mid];
+       newnode->left = array_to_tree(arr, start, mid-1);
+       newnode->right = array_to_tree(arr, mid+1, end);
+       return newnode;
+    }
+    
+    
+}
+void print_tree(struct node* root)
+{
+     if(root==NULL)	
+      return;
+    if(root->left==NULL && root->right==NULL)
+     {
+     	cout<<root->data;
+     	return;
+     }
+    else
+    {
+    	  print_tree(root->left);
+    	  cout<<root->data;
+    	  print_tree(root->right);
+    }
+}
+int main() {
+	
+	int arr[] = {2,3,4,5,6,7,8,89,90};
+    struct node* root = array_to_tree(arr,0,8);
+    print_tree(root);
+	return 0;
+}
