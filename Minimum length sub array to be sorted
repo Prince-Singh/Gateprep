@@ -1,0 +1,70 @@
+#include <iostream>
+using namespace std;
+
+int min_length_subarray_to_sort(int arr[], int size)
+{
+       int startindex =0 ;
+       int lastindex = size-1;
+       int minindex =0, maxindex =0;
+       int i=0, j=size-1;
+       while(i<j)
+       {
+       	     if(arr[i]<arr[i+1])
+       	       i++;
+       	     else
+       	       startindex = i;
+       	     if(arr[j]>arr[j-1])
+       	       j--;
+       	     else
+       	       lastindex = j;
+       	     if(startindex!=0 && lastindex!=size-1)
+       	       break;
+       }
+       if(i>=j)
+       {  cout<<"Array is totally sorted."<<endl;
+          return 0;
+       }
+       else
+       {
+       	   int max =arr[startindex], min = 200;
+           for(int k=startindex; k<=lastindex; k++)
+          {
+       	       if(arr[k]<min)
+       	         min = arr[k];
+       	       else
+       	        if(arr[k]>max)
+       	           max = arr[k];
+       	        
+          }
+          cout<<min<<" "<<max<<endl;
+          for(int k=0; k<=startindex; k++)
+          {
+          	  if(arr[k]>min)
+          	  {
+          	  	  minindex = k;
+          	  	  break;
+          	  } 
+          }
+           for(int k=size-1; k>=lastindex; k--)
+          {
+          	  if(arr[k]<max)
+          	  {
+          	  	  maxindex = k;
+          	  	  break;
+          	  } 
+          }
+          cout<<"Minimum length sub array need to be sorted is"<<endl;
+          for(int k=minindex; k<=maxindex; k++)
+           cout<<arr[k]<<" ";
+           cout<<endl;
+          maxindex = maxindex - minindex + 1;
+          return maxindex;
+       }
+}
+int main() {
+	
+	int arr[] = {1,4,7,3,10,48,17,26,30,45,50,62};
+	int length = min_length_subarray_to_sort(arr,12);
+	cout<<length;
+	return 0;
+}
