@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+int binarysearch(int arr[], int low, int high, int x)
+{
+      
+      if(high>=low)
+      {
+      	  int mid = (high + low)/2;
+      	  if((mid == 0 || arr[mid-1]<x) && (arr[mid] == x))
+      	     return mid;
+      	  else
+      	   if(x>arr[mid])
+      	    return binarysearch(arr, mid+1, high , x);
+      	   else
+      	     return binarysearch(arr, low, mid-1, x);
+      }
+      return -1;
+}
+bool ismajority(int arr[] , int size, int x)
+{
+         int i = binarysearch(arr, 0, size-1, x);
+         if(i== -1)
+          return false;
+         
+         	  if (((i + size/2) <= (size -1)) && arr[i + size/2] == x)
+                 return true;
+              else
+                 return false;
+         
+}
+
+int main() {
+	
+	int arr[] = {1,1,2,2,2,3,3,3,3};
+	int num = 2;
+	bool b = ismajority(arr, 9, num);
+	if(b)
+	 cout<<num<<" is a majority element.";
+	else
+	 cout<<num<<" is not a majority element.";
+	return 0;
+}
