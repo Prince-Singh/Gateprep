@@ -1,0 +1,35 @@
+#include <iostream>
+using namespace std;
+bool subset_sum(int arr[], int size, int sum)
+{
+     bool table[size+1][sum+1];
+     for(int i=0; i<=size; i++)
+     {
+     	for(int j=0; j<=sum; j++)
+     	{
+     		 if(j==0)
+     		   table[i][j] = true;
+     		 else  
+     		    if(i==0)
+     		      table[i][j] = false;
+     		 else
+     		 {
+     		 	if(arr[i-1]>j)
+     		 	  table[i][j] = table[i-1][j];
+     		 	else
+     		 	{
+     		 		table[i][j] = table[i-1][j-arr[i-1]] || table[i-1][j];
+     		 	}
+     		 }
+     	}
+     }
+     return table[size][sum];
+}
+int main() {
+	
+	int arr[] = {6,3,2,1};
+	int sum = 11;
+	bool b = subset_sum(arr, 4, sum);
+	cout<<b;
+	return 0;
+}
