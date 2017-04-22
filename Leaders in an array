@@ -1,0 +1,38 @@
+#include <iostream>
+#include <stack>
+using namespace std;
+void leaders(int arr[], int size)
+{
+     	stack<int> s;
+     	int x = 0;
+     	s.push(arr[0]);
+        for(int i=1; i<=size-1; i++)
+        {
+            
+             if(arr[i]<=s.top())
+               {
+               	  s.push(arr[i]);
+               }
+             else
+             {
+             	 while(!s.empty() && s.top()<arr[i])
+             	 {
+             	 	 x = s.top();
+             	 	 s.pop();
+             	 }
+             	 s.push(arr[i]);
+             }
+        }
+        while(!s.empty())
+        {
+        	 x = s.top();
+        	 cout<<x<<endl;
+        	 s.pop();
+        }
+}
+int main() {
+	
+	int arr[] = {98,23,54,12,20,7,27};
+	leaders(arr, 7);
+	return 0;
+}
