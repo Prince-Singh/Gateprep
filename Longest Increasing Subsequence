@@ -61,8 +61,8 @@ int longest_increasing_subsequence(int arr[], int size)
 }
 int main() {
 	
-	int arr[] = {3,4,-1,5,8,2,3,12,7,9,10};
-    int length = longest_increasing_subsequence(arr, 11);
+	int arr[] = {-1,7,8,1,2,3,4,5,6};
+    int length = longest_increasing_subsequence(arr, 9);
     cout<<length;
 	return 0;
 }
