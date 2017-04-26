@@ -1,0 +1,57 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+int shortest_range(vector<int> arr[], int size)
+{
+     int pointer[size];
+     int max = -1, min = 200;
+     int range = 0;
+     int count = 0, minindex = 0;
+     for(int i=0; i<size; i++)
+        pointer[i] = 0;
+     while(count==0)
+     {
+     	if (arr[0].at(pointer[0]) > arr[1].at(pointer[1])) 
+       {
+	        max = arr[0].at(pointer[0]);
+	        min = arr[1].at(pointer[1]);
+	        minindex = 1;
+       } 
+       else
+        {
+     	    min = arr[0].at(pointer[0]);
+	        max = arr[1].at(pointer[1]);
+	        minindex = 0;
+        }  
+     	for(int i=2; i<size; i++)
+     	{
+     		if(pointer[i]<arr[i].size() && arr[i].at(pointer[i])>max)
+     		{  
+     			max = arr[i].at(pointer[i]);
+     		    
+     		}
+     		else
+     		{
+     			if(pointer[i]<arr[i].size() && arr[i].at(pointer[i])<min)
+     		  {	   min = arr[i].at(pointer[i]);
+     		       minindex = i;
+     		  }
+     		}
+     	}
+     	pointer[minindex] = pointer[minindex] + 1;
+     	if(pointer[minindex]>=arr[minindex].size())
+     	   count = 1;
+     	range = max - min +1;
+     }
+     
+     return range;
+}
+int main() {
+	
+	vector<int> arr[3]={{4,10,15,24,26},
+	                    {0,9,12,21},
+	                    {5,18,22,30}};
+    int range = shortest_range(arr, 3);	 
+    cout<<range;
+	return 0;
+}
