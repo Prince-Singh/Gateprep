@@ -1,0 +1,38 @@
+#include <iostream>
+
+using namespace std;
+
+int Davis_staircase(int n)
+{
+    int staircase[n];
+    if(n==0)
+        return 0;
+    if(n==1)
+        return 1;
+    if(n==2)
+        return 2;
+    if(n==3)
+        return 4;
+    
+    staircase[0] = 1;
+    staircase[1] = 2;
+    staircase[2] = 4;
+    for(int i=3; i<n; i++)
+    {
+         staircase[i] = staircase[i-1] + staircase[i-2] + staircase[i-3];   
+    }
+    return staircase[n-1];
+}
+int main(){
+    int s;
+    cin >> s;
+    for(int a0 = 0; a0 < s; a0++){
+        int n;
+        cin >> n;
+        int total_ways = 0;
+        total_ways = Davis_staircase(n);
+        cout<<total_ways<<endl;
+    }
+    
+    return 0;
+}
