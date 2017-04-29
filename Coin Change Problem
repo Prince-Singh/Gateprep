@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+
+using namespace std;
+
+long long make_change(vector<int> coins, int money) {
+    
+         long long coinstable[coins.size()][money];
+         for(int i=0; i<money; i++)
+         {
+              if((i+1)%coins[0] == 0)
+                  coinstable[0][i] = 1;
+              else
+                  coinstable[0][i] = 0;
+         }
+         for(int i=1; i<coins.size(); i++)
+         {
+               for(int j=0; j<money; j++)
+               {
+                    if(coins[i]>j+1)
+                        coinstable[i][j] = coinstable[i-1][j];
+                    if(coins[i] == j+1)
+                        coinstable[i][j] = coinstable[i-1][j] + 1;
+                    if(coins[i]<j+1)
+                    {
+                        coinstable[i][j] = coinstable[i-1][j] + coinstable[i][(j+1-coins[i])-1];    
+                    }
+               }
+         }
+      return coinstable[coins.size()-1][money-1];
+}
+
+int main(){
+    int n;
+    int m;
+    cin >> n >> m;
+    vector<int> coins(m);
+    for(int coins_i = 0;coins_i < m;coins_i++){
+       cin >> coins[coins_i];
+    }
+    cout << make_change(coins, n) << endl;
+    return 0;
+}
