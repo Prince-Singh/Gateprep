@@ -1,0 +1,57 @@
+#include <iostream>
+#include <string>
+using namespace std;
+
+int palindrome_partition(string str, int size)
+{
+       	bool table[size][size];
+       	int cuts[size];
+       	for(int i=0; i<size; i++)
+       	   cuts[i] = size+1;
+       	for(int i=0; i<size; i++)
+       	     table[i][i] = true;
+       	for(int i=0; i<size-1; i++)
+       	{
+       		  if(str.at(i) == str.at(i+1))
+       		    table[i][i+1] = true;
+       		  else
+       		    table[i][i+1] = false;
+       	}
+       	for(int curr_len=3; curr_len<=size; curr_len++)
+       	{
+       		for(int i=0; i<size-curr_len+1; i++)
+       		{
+       			int j = i+curr_len-1;
+       			if(str.at(i) == str.at(j) && table[i+1][j-1])
+       			  table[i][j] = true;
+       			else
+       			 table[i][j] = false;
+       		}
+       	}
+       	cuts[0] = 0;
+       	for(int i=1; i<size; i++)
+       	{
+       		if(table[0][i] == true)
+       		   cuts[i] = 0;
+       		else
+       		{
+       			for(int j=1; j<=i; j++)
+       			{
+       				  if(table[j][i] == true)
+       				  {  cuts[i] = cuts[j-1] + 1;
+       				     break;
+       				  }
+       				  
+       			}
+       		}
+       	}
+       	return cuts[size-1];
+       	
+}
+int main() {
+	
+	string str = "ababa";
+	int l = palindrome_partition(str,5);
+	cout<<l;
+	return 0;
+}
