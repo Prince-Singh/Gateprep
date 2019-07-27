@@ -1,0 +1,23 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+	//code
+	int n;
+	cin>>n;
+	for(int i=0; i<n; i++)
+	{
+	    int num_of_elm;
+	    cin>>num_of_elm;
+	    int arr[num_of_elm-1];
+	    for(int j=0; j<num_of_elm-1; j++)
+	      cin>>arr[j];
+	    long sum = (num_of_elm  * (num_of_elm+1))/2;
+	    long arr_sum=0;
+	    for(int j=0; j<num_of_elm-1; j++)
+	      arr_sum = arr_sum + arr[j];
+	    long missing_elm = sum-arr_sum; 
+	    cout<<missing_elm<<endl;
+	}
+	return 0;
+}
